@@ -1,0 +1,32 @@
+services:
+  hotels_microservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8088:8000
+    depends_on:
+      - db_hotels_microservice
+    networks:
+      - network_hotels_microservice
+    env_file: .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=hotels_microservice.settings
+    volumes:
+      - .:/app
+
+  db_hotels_microservice:
+    image: postgres:16
+    container_name: db_hotels_microservice
+    env_file: .env
+    ports:
+      - 5438:5432
+    networks:
+      - network_hotels_microservice
+    restart: always
+
+networks:
+  network_hotels_microservice:
+    driver: bridge
+
+
