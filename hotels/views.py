@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from .models import Hotels, Rooms
 from .serializers import HotelsSerializer, RoomsSerializer
@@ -26,6 +26,6 @@ class RoomsView(generics.ListAPIView):
         query_param = request.query_params.get("id")
         rooms = self.get_queryset()
         if query_param:
-            room = self.get_queryset().get(id=query_param)
+            room = get_object_or_404(Rooms, id=query_param)
             return Response(RoomsSerializer(room).data)
         return Response(RoomsSerializer(rooms, many=True).data)
