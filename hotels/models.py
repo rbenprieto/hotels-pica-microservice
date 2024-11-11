@@ -70,6 +70,9 @@ class Rooms(models.Model):
     tiene_rociadores = models.BooleanField(default=True)
     tiene_sistema_de_seguridad = models.BooleanField(default=True)
 
+    imagen = models.URLField(max_length=500, null=True, blank=True)
+    imagen_2 = models.URLField(max_length=500, null=True, blank=True)
+
     def __str__(self):
         return f"{self.nombre} - {self.tipo_habitacion}"
 
