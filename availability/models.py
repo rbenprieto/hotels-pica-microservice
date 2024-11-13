@@ -14,7 +14,6 @@ class Reservations(models.Model):
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
-        unique_together = ("habitacion", "usuario")
 
 
 class PaymentsReservations(models.Model):

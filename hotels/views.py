@@ -3,6 +3,7 @@ from rest_framework import generics
 from .models import Hotels, Rooms
 from .serializers import HotelsSerializer, RoomsSerializer
 from rest_framework.response import Response
+from .auxiliars import validate_token
 
 
 class HotelView(generics.ListAPIView):
@@ -10,6 +11,16 @@ class HotelView(generics.ListAPIView):
     serializer_class = HotelsSerializer
 
     def get(self, request):
+        token = request.headers.get("Authorization")
+        if not token:
+            return Response({"error": "Token is required"}, status=401)
+        token_parts = token.split(" ")
+        token = token_parts[1] if len(token_parts) > 1 else None
+        if not token:
+            return Response({"error": "Token is required"}, status=401)
+        if not validate_token(token):
+            return Response({"error": "Invalid token"}, status=401)
+
         query_param = request.query_params.get("id")
         hotels = self.get_queryset()
         if query_param:
@@ -23,6 +34,16 @@ class RoomsView(generics.ListAPIView):
     serializer_class = RoomsSerializer
 
     def get(self, request):
+        token = request.headers.get("Authorization")
+        if not token:
+            return Response({"error": "Token is required"}, status=401)
+        token_parts = token.split(" ")
+        token = token_parts[1] if len(token_parts) > 1 else None
+        if not token:
+            return Response({"error": "Token is required"}, status=401)
+        if not validate_token(token):
+            return Response({"error": "Invalid token"}, status=401)
+
         query_param = request.query_params.get("id")
         hotel_query_param = request.query_params.get("hotel")
         rooms = self.get_queryset()
