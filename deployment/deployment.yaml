@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hotels
-          image: knimisica/hotels:1
+          image: knimisica/hotels:latest
           envFrom:
             - configMapRef:
                 name: authorization-secret
