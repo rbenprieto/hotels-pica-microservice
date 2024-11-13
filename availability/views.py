@@ -13,15 +13,15 @@ class ReservationsView(generics.ListCreateAPIView):
     serializer_class = ReservationsSerializer
 
     def post(self, request):
-        token = request.headers.get("Authorization")
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        token_parts = token.split(" ")
-        token = token_parts[1] if len(token_parts) > 1 else None
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        if not validate_token(token):
-            return Response({"error": "Invalid token"}, status=401)
+        # token = request.headers.get("Authorization")
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # token_parts = token.split(" ")
+        # token = token_parts[1] if len(token_parts) > 1 else None
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # if not validate_token(token):
+        #     return Response({"error": "Invalid token"}, status=401)
 
         reservation = ReservationsSerializer(data=request.data)
         reservation.is_valid(raise_exception=True)
@@ -29,15 +29,15 @@ class ReservationsView(generics.ListCreateAPIView):
         return Response(ReservationsSerializer(reservation_created).data, status=201)
 
     def get(self, request):
-        token = request.headers.get("Authorization")
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        token_parts = token.split(" ")
-        token = token_parts[1] if len(token_parts) > 1 else None
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        if not validate_token(token):
-            return Response({"error": "Invalid token"}, status=401)
+        # token = request.headers.get("Authorization")
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # token_parts = token.split(" ")
+        # token = token_parts[1] if len(token_parts) > 1 else None
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # if not validate_token(token):
+        #     return Response({"error": "Invalid token"}, status=401)
 
         reservations = self.get_queryset()
         reservations_serialized = ReservationsSerializer(reservations, many=True)
@@ -72,15 +72,15 @@ class PaymentsReservationsView(generics.CreateAPIView):
     serializer_class = PaymentsReservationsSerializer
 
     def post(self, request):
-        token = request.headers.get("Authorization")
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        token_parts = token.split(" ")
-        token = token_parts[1] if len(token_parts) > 1 else None
-        if not token:
-            return Response({"error": "Token is required"}, status=401)
-        if not validate_token(token):
-            return Response({"error": "Invalid token"}, status=401)
+        # token = request.headers.get("Authorization")
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # token_parts = token.split(" ")
+        # token = token_parts[1] if len(token_parts) > 1 else None
+        # if not token:
+        #     return Response({"error": "Token is required"}, status=401)
+        # if not validate_token(token):
+        #     return Response({"error": "Invalid token"}, status=401)
 
         payment = PaymentsReservationsSerializer(data=request.data)
         payment.is_valid(raise_exception=True)
