@@ -12,6 +12,8 @@ def validate_token(token: str) -> bool:
             },
             json={"token": token},
         )
+        print(response.__dict__)
+        print(response.request)
         if response.status_code == 200 and response.json():
             return True
     return False
