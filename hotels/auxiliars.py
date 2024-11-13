@@ -5,7 +5,7 @@ def validate_token(token: str) -> bool:
     if token:
         response = request(
             method="POST",
-            url="http://authorization/api/auth/validate",
+            url="http://authorization:8083/api/auth/validate",
             headers={
                 "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json",
