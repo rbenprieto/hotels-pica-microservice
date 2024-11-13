@@ -18,7 +18,7 @@ spec:
           image: knimisica/hotels:latest
           envFrom:
             - configMapRef:
-                name: authorization-secret
+                name: hotels-secret
           ports:
             - containerPort: 8000
 
